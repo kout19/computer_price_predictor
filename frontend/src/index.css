@@ -1,1 +1,185 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+/*
+  Tailwind v4 defaults to `prefers-color-scheme` for the `dark:`
+  variant. We override it to be class-based instead, so dark mode is
+  driven by a `.dark` class on <html> (set by ThemeProvider), making
+  "dark by default" a deliberate app decision rather than dependent
+  on the user's OS setting.
+*/
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Design tokens, mapped to CSS variables so both plain Tailwind
+  utilities (bg-background, text-foreground, etc.) and shadcn/ui
+  components resolve correctly. Values are HSL triplets (no hsl()
+  wrapper) per shadcn/ui convention.
+*/
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --blur-glass: 16px;
+
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --shadow-glow: 0 0 40px -10px hsl(var(--primary) / 0.5);
+
+  --animate-fade-up: fade-up 0.5s ease-out forwards;
+  --animate-scale-in: scale-in 0.3s ease-out forwards;
+  --animate-pulse-glow: pulse-glow 2.5s ease-in-out infinite;
+
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scale-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+}
+
+/*
+  Actual token values. Declared on :root as the DEFAULT (dark) theme,
+  satisfying "dark mode by default" without depending on OS
+  preference. A `.light` class block is included for completeness,
+  in case a future theme toggle is added.
+*/
+@layer base {
+  :root {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 98%;
+
+    --card: 222 40% 9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222 40% 9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 258 90% 66%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 217 33% 17%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 199 89% 60%;
+    --accent-foreground: 222 47% 6%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217 33% 20%;
+    --input: 217 33% 20%;
+    --ring: 258 90% 66%;
+
+    --radius: 0.85rem;
+  }
+
+  /* Reserved for a future light-mode toggle; not wired to any UI yet. */
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 258 90% 55%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 199 89% 48%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 258 90% 55%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+@layer components {
+  /**
+   * Base glassmorphism card surface, reused by every card component
+   * across the app (result cards, form sections, metric cards).
+   */
+  .glass-panel {
+    @apply relative overflow-hidden rounded-lg border border-white/10
+      bg-white/5 backdrop-blur-[16px] shadow-[0_8px_32px_0_rgba(0,0,0,0.37)];
+  }
+
+  /**
+   * Subtle gradient border glow used on hero/result cards to
+   * reinforce the premium SaaS aesthetic.
+   */
+  .glow-border {
+    @apply relative before:absolute before:inset-0 before:-z-10
+      before:rounded-lg before:bg-gradient-to-r before:from-primary/40
+      before:via-accent/30 before:to-primary/40 before:blur-xl
+      before:content-[''];
+  }
+}

@@ -1,14 +1,13 @@
+/**
+ * Root application component.
+ *
+ * Deliberately minimal — all routing logic lives in
+ * `src/routes/AppRoutes.tsx`. This file exists only as the
+ * composition point React DOM mounts into.
+ */
 
-function App() {
+import { AppRoutes } from "@/routes/AppRoutes";
 
-
-  return (
-    <>
-      <div className="text-blue-600 text-5xl">
-        <h1>hello</h1>
-      </div>
-    </>
-  );
+export default function App(): JSX.Element {
+  return <AppRoutes />;
 }
-
-export default App;
