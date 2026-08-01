@@ -1,0 +1,28 @@
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+
+# Python cache & bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Data & Large Files (Keep raw/heavy datasets out of Git)
+data/raw/*
+!data/raw/.gitkeep
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Environment variables & secrets
+.env
+
+# VS Code settings
+.vscode/

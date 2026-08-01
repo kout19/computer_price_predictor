@@ -1,0 +1,77 @@
+Folder PATH listing for volume New Volume
+Volume serial number is 000000F2 5C80:D280
+D:.
+|   main.py
+|   structure.txt
+|   __init__.py
+|   
++---api
+|   |   dependencies.py
+|   |   __init__.py
+|   |   
+|   +---v1
+|   |   |   predict.py
+|   |   |   __init__.py
+|   |   |   
+|   |   \---__pycache__
+|   |           predict.cpython-313.pyc
+|   |           __init__.cpython-313.pyc
+|   |           
+|   \---__pycache__
+|           dependencies.cpython-313.pyc
+|           __init__.cpython-313.pyc
+|           
++---core
+|   |   config.py
+|   |   logging.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|           config.cpython-313.pyc
+|           logging.cpython-313.pyc
+|           __init__.cpython-313.pyc
+|           
++---ml
+|   |   loader.py
+|   |   predictor.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|           loader.cpython-313.pyc
+|           predictor.cpython-313.pyc
+|           __init__.cpython-313.pyc
+|           
++---models
+|       predictor.py
+|       preprocessor.py
+|       
++---schemas
+|   |   request.py
+|   |   response.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|           request.cpython-313.pyc
+|           response.cpython-313.pyc
+|           __init__.cpython-313.pyc
+|           
++---services
+|   |   prediction_service.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|           prediction_service.cpython-313.pyc
+|           __init__.cpython-313.pyc
+|           
++---utils
+|   |   exceptions.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|           exceptions.cpython-313.pyc
+|           __init__.cpython-313.pyc
+|           
+\---__pycache__
+        main.cpython-313.pyc
+        __init__.cpython-313.pyc
+        

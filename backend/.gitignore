@@ -1,0 +1,27 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter notebooks (optional – keep or ignore as you prefer)
+# *.ipynb
+
+# Artifacts (if you don't want to commit them)
+# artifacts/*.joblib
+
+# Environment variables
+.env
+.env.local
