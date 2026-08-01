@@ -1,0 +1,74 @@
+[
+  {
+    "modelName": "Linear Regression",
+    "mae": 182.4,
+    "mse": 50142.1,
+    "rmse": 224.0,
+    "r2Score": 0.66,
+    "isBestModel": false,
+    "trainingSpeed": "Fast",
+    "interpretability": "High",
+    "quality": "Baseline",
+    "description": "A transparent baseline that is quick to train and easy to explain."
+  },
+  {
+    "modelName": "Ridge",
+    "mae": 171.2,
+    "mse": 46801.8,
+    "rmse": 216.3,
+    "r2Score": 0.69,
+    "isBestModel": false,
+    "trainingSpeed": "Fast",
+    "interpretability": "High",
+    "quality": "Solid",
+    "description": "Regularization improves stability without losing the linear structure."
+  },
+  {
+    "modelName": "Lasso",
+    "mae": 176.7,
+    "mse": 49312.9,
+    "rmse": 222.0,
+    "r2Score": 0.67,
+    "isBestModel": false,
+    "trainingSpeed": "Fast",
+    "interpretability": "Medium",
+    "quality": "Moderate",
+    "description": "Useful for compact feature selection and concise explanation."
+  },
+  {
+    "modelName": "Decision Tree",
+    "mae": 155.8,
+    "mse": 41264.4,
+    "rmse": 203.1,
+    "r2Score": 0.73,
+    "isBestModel": false,
+    "trainingSpeed": "Medium",
+    "interpretability": "Medium",
+    "quality": "Good",
+    "description": "Captures nonlinear splits effectively but can become unstable on noisy input."
+  },
+  {
+    "modelName": "Random Forest",
+    "mae": 143.6,
+    "mse": 35890.2,
+    "rmse": 189.4,
+    "r2Score": 0.78,
+    "isBestModel": false,
+    "trainingSpeed": "Medium",
+    "interpretability": "Medium",
+    "quality": "Very good",
+    "description": "An ensemble of trees improves robustness and handles nonlinear effects well."
+  },
+  {
+    "modelName": "Gradient Boosting",
+    "mae": 128.9,
+    "mse": 31542.8,
+    "rmse": 177.6,
+    "r2Score": 0.82,
+    "isBestModel": true,
+    "trainingSpeed": "Medium",
+    "interpretability": "Medium",
+    "quality": "Best",
+    "description": "Sequential boosting captures subtle relationships and gives the best fit on this tabular benchmark."
+  }
+]

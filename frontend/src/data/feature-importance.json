@@ -1,0 +1,12 @@
+[
+  { "feature": "cpu_tier", "importance": 0.182 },
+  { "feature": "ram_gb", "importance": 0.151 },
+  { "feature": "storage_gb", "importance": 0.129 },
+  { "feature": "display_size_in", "importance": 0.113 },
+  { "feature": "gpu_tier", "importance": 0.094 },
+  { "feature": "brand", "importance": 0.089 },
+  { "feature": "release_year", "importance": 0.078 },
+  { "feature": "weight_kg", "importance": 0.065 },
+  { "feature": "battery_wh", "importance": 0.057 },
+  { "feature": "os", "importance": 0.042 }
+]

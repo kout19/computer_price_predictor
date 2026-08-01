@@ -18,6 +18,39 @@ export interface ModelMetrics {
   isBestModel: boolean;
 }
 
+export interface ModelMetricsWithMeta extends ModelMetrics {
+  trainingSpeed: string;
+  interpretability: string;
+  quality: string;
+  description: string;
+}
+
+export interface FeatureImportancePoint {
+  feature: string;
+  importance: number;
+}
+
+export interface ChartDatum {
+  name: string;
+  value: number;
+}
+
+export interface DatasetInsights {
+  overview: {
+    totalRecords: number;
+    totalFeatures: number;
+    numericalFeatureCount: number;
+    categoricalFeatureCount: number;
+    targetVariable: string;
+  };
+  featureTypeBreakdown: ChartDatum[];
+  osDistribution: ChartDatum[];
+  brandDistribution: ChartDatum[];
+  storageDistribution: ChartDatum[];
+  wifiDistribution: ChartDatum[];
+  displayTypeDistribution: ChartDatum[];
+}
+
 /** Describes a single feature in the training dataset. */
 export interface DatasetFeature {
   name: string;

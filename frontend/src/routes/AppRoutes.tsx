@@ -13,10 +13,10 @@ import { AppLayout } from "@/components/layout/AppLayout";
 
 const HomePage = lazy(() => import("@/pages/HomePage"));
 const PredictionPage = lazy(() => import("@/pages/PredictionPage"));
-// const DatasetInfoPage = lazy(() => import("@/pages/DatasetInfoPage"));
-// const ModelInfoPage = lazy(() => import("@/pages/ModelInfoPage"));
-// const ModelComparisonPage = lazy(() => import("@/pages/ModelComparisonPage"));
-// const AboutTeamPage = lazy(() => import("@/pages/AboutTeamPage"));
+const DatasetInfoPage = lazy(() => import("@/pages/DatasetInfoPage"));
+const ModelInfoPage = lazy(() => import("@/pages/ModelInfoPage"));
+const ModelComparisonPage = lazy(() => import("@/pages/ModelComparisonPage"));
+const AboutTeamPage = lazy(() => import("@/pages/AboutTeamPage"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 
 /**
@@ -31,10 +31,10 @@ export function AppRoutes(): JSX.Element {
         <Route element={<AppLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/predict" element={<PredictionPage />} />
-          {/* <Route path="/dataset" element={<DatasetInfoPage />} />
+          <Route path="/dataset" element={<DatasetInfoPage />} />
           <Route path="/model-info" element={<ModelInfoPage />} />
           <Route path="/model-comparison" element={<ModelComparisonPage />} />
-          <Route path="/about" element={<AboutTeamPage />} /> */}
+          <Route path="/about" element={<AboutTeamPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

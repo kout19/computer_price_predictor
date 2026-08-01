@@ -14,8 +14,8 @@ interface Stat {
 const STATS: Stat[] = [
   { value: "37", label: "Input Features" },
   { value: "5+", label: "Regression Models Evaluated" },
-  { value: "< 1s", label: "Average Prediction Time" },
-  { value: "0.9+", label: "Best Model R² Score" },
+  { value: "< 50Sec", label: "Average Prediction Time" },
+  { value: "0.87+", label: "Best Model R² Score" },
 ];
 
 export function StatsBanner(): JSX.Element {

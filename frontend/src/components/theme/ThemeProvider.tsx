@@ -51,14 +51,22 @@ export function ThemeProvider({
     if (typeof window === "undefined") {
       return defaultTheme;
     }
+
     const stored = window.localStorage.getItem(storageKey) as Theme | null;
-    return stored ?? defaultTheme;
+    if (stored === "dark" || stored === "light") {
+      return stored;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   });
 
   useEffect(() => {
     const root = window.document.documentElement;
     root.classList.remove("dark", "light");
     root.classList.add(theme);
+    root.style.colorScheme = theme;
   }, [theme]);
 
   const value = useMemo<ThemeProviderState>(

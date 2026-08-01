@@ -31,7 +31,7 @@ export function FormFieldWrapper({
   className,
 }: FormFieldWrapperProps): JSX.Element {
   return (
-    <div className={cn("flex flex-col gap-1.5", className)}>
+    <div className={cn("flex flex-col gap-2", className)}>
       <Label htmlFor={htmlFor}>
         {label}
         {required && <span className="ml-0.5 text-destructive">*</span>}
@@ -46,7 +46,7 @@ export function FormFieldWrapper({
           {error.message}
         </p>
       ) : helpText ? (
-        <p className="text-xs text-muted-foreground">{helpText}</p>
+        <p className="text-xs leading-5 text-muted-foreground">{helpText}</p>
       ) : null}
     </div>
   );

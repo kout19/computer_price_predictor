@@ -6,8 +6,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Cpu, Menu, X } from "lucide-react";
+import { Cpu, Menu, Moon, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/theme/ThemeProvider";
 
 interface NavItem {
   label: string;
@@ -25,6 +26,7 @@ const NAV_ITEMS: NavItem[] = [
 
 export function Navbar(): JSX.Element {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-white/10 bg-background/70 backdrop-blur-[16px]">
@@ -61,19 +63,34 @@ export function Navbar(): JSX.Element {
           ))}
         </ul>
 
-        <button
-          type="button"
-          className="flex h-9 w-9 items-center justify-center rounded-md text-foreground md:hidden"
-          onClick={() => setIsMobileMenuOpen((open) => !open)}
-          aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={isMobileMenuOpen}
-        >
-          {isMobileMenuOpen ? (
-            <X className="h-5 w-5" />
-          ) : (
-            <Menu className="h-5 w-5" />
-          )}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-foreground transition-colors hover:bg-white/5"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+          >
+            {theme === "dark" ? (
+              <Sun className="h-4 w-4" />
+            ) : (
+              <Moon className="h-4 w-4" />
+            )}
+          </button>
+
+          <button
+            type="button"
+            className="flex h-9 w-9 items-center justify-center rounded-md text-foreground md:hidden"
+            onClick={() => setIsMobileMenuOpen((open) => !open)}
+            aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={isMobileMenuOpen}
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </button>
+        </div>
       </nav>
 
       <AnimatePresence>

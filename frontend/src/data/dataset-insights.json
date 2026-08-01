@@ -1,0 +1,42 @@
+{
+  "overview": {
+    "totalRecords": 100000,
+    "totalFeatures": 33,
+    "numericalFeatureCount": 20,
+    "categoricalFeatureCount": 13,
+    "targetVariable": "price"
+  },
+  "featureTypeBreakdown": [
+    { "name": "Numerical", "value": 23 },
+    { "name": "Categorical", "value": 14 }
+  ],
+  "osDistribution": [
+    { "name": "Windows", "value": 48 },
+    { "name": "Linux", "value": 17 },
+    { "name": "ChromeOS", "value": 15 },
+    { "name": "macOS", "value": 20 }
+  ],
+  "brandDistribution": [
+    { "name": "Dell", "value": 22 },
+    { "name": "HP", "value": 18 },
+    { "name": "Lenovo", "value": 17 },
+    { "name": "Apple", "value": 16 },
+    { "name": "Acer", "value": 12 },
+    { "name": "Asus", "value": 15 }
+  ],
+  "storageDistribution": [
+    { "name": "SSD", "value": 78 },
+    { "name": "HDD", "value": 12 },
+    { "name": "Hybrid", "value": 10 }
+  ],
+  "wifiDistribution": [
+    { "name": "Wi-Fi 6", "value": 41 },
+    { "name": "Wi-Fi 5", "value": 34 },
+    { "name": "Wi-Fi 4", "value": 25 }
+  ],
+  "displayTypeDistribution": [
+    { "name": "IPS", "value": 63 },
+    { "name": "OLED", "value": 17 },
+    { "name": "TN", "value": 20 }
+  ]
+}
