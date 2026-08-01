@@ -1,6 +1,8 @@
 /**
- * "GPU" section of the prediction form: brand, tier, family,
- * generation, suffix, and VRAM capacity.
+ * "GPU" section of the prediction form. All categorical fields
+ * (brand, family, generation, suffix) are dynamic dropdowns sourced
+ * from the backend's options vocabulary. gpu_tier is numeric per the
+ * trained model's schema.
  */
 
 import { MonitorSmartphone } from "lucide-react";
@@ -8,24 +10,22 @@ import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormSectionCard } from "@/components/prediction/FormSectionCard";
 import { SelectField } from "@/components/prediction/SelectField";
 import { NumberField } from "@/components/prediction/NumberField";
-import { TextField } from "@/components/prediction/TextField";
-import {
-  GPU_BRAND_OPTIONS,
-  GPU_FAMILY_OPTIONS,
-  GPU_TIER_OPTIONS,
-} from "@/constants/formOptions";
+import { toSelectOptions } from "@/lib/toSelectOptions";
 import type { PredictionFormValues } from "@/lib/validation/predictionSchema";
+import type { PredictionOptions } from "@/types/options";
 
 interface GpuSectionProps {
   control: Control<PredictionFormValues>;
   register: UseFormRegister<PredictionFormValues>;
   errors: FieldErrors<PredictionFormValues>;
+  options: PredictionOptions;
 }
 
 export function GpuSection({
   control,
   register,
   errors,
+  options,
 }: GpuSectionProps): JSX.Element {
   return (
     <FormSectionCard
@@ -38,44 +38,34 @@ export function GpuSection({
         control={control}
         name="gpu_brand"
         label="GPU Brand"
-        options={GPU_BRAND_OPTIONS}
+        options={toSelectOptions(options.gpu_brand)}
       />
-      <SelectField
-        control={control}
+      <NumberField
+        register={register}
+        errors={errors}
         name="gpu_tier"
         label="GPU Tier"
-        options={GPU_TIER_OPTIONS}
+        helpText="Numeric tier value used by the trained model"
       />
       <SelectField
         control={control}
         name="gpu_family"
         label="GPU Family"
-        options={GPU_FAMILY_OPTIONS}
+        options={toSelectOptions(options.gpu_family)}
       />
-      <TextField
-        register={register}
-        errors={errors}
+      <SelectField
+        control={control}
         name="gpu_generation"
         label="GPU Generation"
-        placeholder="e.g. 40 Series"
-        helpText="Optional"
+        options={toSelectOptions(options.gpu_generation)}
+        required={false}
       />
-      <TextField
-        register={register}
-        errors={errors}
+      <SelectField
+        control={control}
         name="gpu_suffix"
         label="GPU Suffix"
-        placeholder="e.g. Ti, XT"
-        helpText="Optional"
-      />
-      <NumberField
-        register={register}
-        errors={errors}
-        name="vram_gb"
-        label="VRAM (GB)"
-        step={0.5}
+        options={toSelectOptions(options.gpu_suffix)}
         required={false}
-        helpText="Leave blank for integrated graphics"
       />
     </FormSectionCard>
   );

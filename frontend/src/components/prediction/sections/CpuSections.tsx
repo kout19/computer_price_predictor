@@ -1,6 +1,8 @@
 /**
- * "CPU" section of the prediction form: brand, tier, core/thread
- * counts, clock speeds, series, generation, and suffix.
+ * "CPU" section of the prediction form. All categorical fields
+ * (brand, series, suffix) are dynamic dropdowns sourced from the
+ * backend's options vocabulary. cpu_tier and cpu_generation are
+ * numeric per the trained model's schema.
  */
 
 import { Cpu } from "lucide-react";
@@ -8,25 +10,22 @@ import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormSectionCard } from "@/components/prediction/FormSectionCard";
 import { SelectField } from "@/components/prediction/SelectField";
 import { NumberField } from "@/components/prediction/NumberField";
-import { TextField } from "@/components/prediction/TextField";
-import {
-  CPU_BRAND_OPTIONS,
-  CPU_GENERATION_OPTIONS,
-  CPU_SERIES_OPTIONS,
-  CPU_TIER_OPTIONS,
-} from "@/constants/formOptions";
+import { toSelectOptions } from "@/lib/toSelectOptions";
 import type { PredictionFormValues } from "@/lib/validation/predictionSchema";
+import type { PredictionOptions } from "@/types/options";
 
 interface CpuSectionProps {
   control: Control<PredictionFormValues>;
   register: UseFormRegister<PredictionFormValues>;
   errors: FieldErrors<PredictionFormValues>;
+  options: PredictionOptions;
 }
 
 export function CpuSection({
   control,
   register,
   errors,
+  options,
 }: CpuSectionProps): JSX.Element {
   return (
     <FormSectionCard
@@ -39,25 +38,26 @@ export function CpuSection({
         control={control}
         name="cpu_brand"
         label="CPU Brand"
-        options={CPU_BRAND_OPTIONS}
+        options={toSelectOptions(options.cpu_brand)}
       />
-      <SelectField
-        control={control}
+      <NumberField
+        register={register}
+        errors={errors}
         name="cpu_tier"
         label="CPU Tier"
-        options={CPU_TIER_OPTIONS}
+        helpText="Numeric tier value used by the trained model"
       />
       <SelectField
         control={control}
         name="cpu_series"
         label="CPU Series"
-        options={CPU_SERIES_OPTIONS}
+        options={toSelectOptions(options.cpu_series)}
       />
-      <SelectField
-        control={control}
+      <NumberField
+        register={register}
+        errors={errors}
         name="cpu_generation"
         label="CPU Generation"
-        options={CPU_GENERATION_OPTIONS}
       />
       <NumberField
         register={register}
@@ -87,13 +87,12 @@ export function CpuSection({
         required={false}
         helpText="Leave blank if not applicable"
       />
-      <TextField
-        register={register}
-        errors={errors}
+      <SelectField
+        control={control}
         name="cpu_suffix"
         label="CPU Suffix"
-        placeholder="e.g. H, K, U"
-        helpText="Optional"
+        options={toSelectOptions(options.cpu_suffix)}
+        required={false}
       />
     </FormSectionCard>
   );

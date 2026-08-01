@@ -1,6 +1,5 @@
 /**
- * "Memory" section of the prediction form: RAM, storage type,
- * storage capacity, and drive count.
+ * "Memory & Storage" section. storage_type is a dynamic dropdown.
  */
 
 import { MemoryStick } from "lucide-react";
@@ -8,16 +7,23 @@ import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormSectionCard } from "@/components/prediction/FormSectionCard";
 import { SelectField } from "@/components/prediction/SelectField";
 import { NumberField } from "@/components/prediction/NumberField";
-import { STORAGE_TYPE_OPTIONS } from "@/constants/formOptions";
+import { toSelectOptions } from "@/lib/toSelectOptions";
 import type { PredictionFormValues } from "@/lib/validation/predictionSchema";
+import type { PredictionOptions } from "@/types/options";
 
 interface MemorySectionProps {
   control: Control<PredictionFormValues>;
   register: UseFormRegister<PredictionFormValues>;
   errors: FieldErrors<PredictionFormValues>;
+  options: PredictionOptions;
 }
 
-export function MemorySection({ control, register, errors }: MemorySectionProps): JSX.Element {
+export function MemorySection({
+  control,
+  register,
+  errors,
+  options,
+}: MemorySectionProps): JSX.Element {
   return (
     <FormSectionCard
       index={3}
@@ -25,12 +31,17 @@ export function MemorySection({ control, register, errors }: MemorySectionProps)
       title="Memory & Storage"
       description="RAM and storage configuration"
     >
-      <NumberField register={register} errors={errors} name="ram_gb" label="RAM (GB)" />
+      <NumberField
+        register={register}
+        errors={errors}
+        name="ram_gb"
+        label="RAM (GB)"
+      />
       <SelectField
         control={control}
         name="storage_type"
         label="Storage Type"
-        options={STORAGE_TYPE_OPTIONS}
+        options={toSelectOptions(options.storage_type)}
       />
       <NumberField
         register={register}

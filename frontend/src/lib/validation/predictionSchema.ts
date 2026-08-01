@@ -1,21 +1,21 @@
 /**
  * Zod validation schema for the computer specification prediction
- * form. Field constraints are intentionally kept in lockstep with the
- * backend's `PredictionRequest` Pydantic schema (same bounds, same
- * required/optional fields) so client-side and server-side validation
- * never disagree.
+ * form. Field constraints are kept in lockstep with the backend's
+ * `PredictionRequest` Pydantic schema.
+ *
+ * NOTE: cpu_tier, gpu_tier, cpu_generation, and bluetooth are numeric
+ * on this backend (not categorical strings) — validated as numbers,
+ * not sourced from the /api/v1/options dropdown vocabulary.
  */
 
 import { z } from "zod";
 
-/** Shared "required, non-empty string" rule for categorical fields. */
 const requiredString = (label: string) =>
   z
     .string()
     .trim()
     .min(1, { message: `${label} is required.` });
 
-/** Shared helper for optional string fields (nullable on the backend). */
 const optionalString = () =>
   z
     .string()
@@ -41,7 +41,9 @@ export const predictionSchema = z.object({
   // CPU
   // ------------------------------------------------------------------
   cpu_brand: requiredString("CPU brand"),
-  cpu_tier: requiredString("CPU tier"),
+  cpu_tier: z.coerce
+    .number({ invalid_type_error: "CPU tier is required." })
+    .min(0, "Cannot be negative."),
   cpu_cores: z.coerce
     .number({ invalid_type_error: "CPU cores is required." })
     .int()
@@ -63,14 +65,18 @@ export const predictionSchema = z.object({
     .optional()
     .nullable(),
   cpu_series: requiredString("CPU series"),
-  cpu_generation: requiredString("CPU generation"),
+  cpu_generation: z.coerce
+    .number({ invalid_type_error: "CPU generation is required." })
+    .min(0, "Cannot be negative."),
   cpu_suffix: optionalString(),
 
   // ------------------------------------------------------------------
   // GPU
   // ------------------------------------------------------------------
   gpu_brand: requiredString("GPU brand"),
-  gpu_tier: requiredString("GPU tier"),
+  gpu_tier: z.coerce
+    .number({ invalid_type_error: "GPU tier is required." })
+    .min(0, "Cannot be negative."),
   gpu_family: requiredString("GPU family"),
   gpu_generation: optionalString(),
   gpu_suffix: optionalString(),
@@ -155,7 +161,9 @@ export const predictionSchema = z.object({
   // Connectivity
   // ------------------------------------------------------------------
   wifi: requiredString("Wi-Fi standard"),
-  bluetooth: requiredString("Bluetooth version"),
+  bluetooth: z.coerce
+    .number({ invalid_type_error: "Bluetooth version is required." })
+    .min(0, "Cannot be negative."),
 
   // ------------------------------------------------------------------
   // Physical & Misc
@@ -179,5 +187,4 @@ export const predictionSchema = z.object({
     .nullable(),
 });
 
-/** Inferred TypeScript type for the validated form output. */
 export type PredictionFormValues = z.infer<typeof predictionSchema>;

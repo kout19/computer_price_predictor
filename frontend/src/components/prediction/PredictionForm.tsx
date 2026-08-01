@@ -1,8 +1,7 @@
 /**
  * Full prediction form: composes all 7 section components, wires the
- * submit action, and surfaces submission errors. All state/logic is
- * supplied by the `usePredictionForm` hook — this component is
- * purely compositional.
+ * submit action, and surfaces submission errors. Categorical dropdown
+ * options are fetched by the parent page and passed down here.
  */
 
 import { AlertTriangle, Loader2, Sparkles } from "lucide-react";
@@ -16,12 +15,14 @@ import { DisplaySection } from "@/components/prediction/sections/DisplaySections
 import { ConnectivitySection } from "@/components/prediction/sections/ConnectivitySection";
 import { PowerSection } from "@/components/prediction/sections/PowerSections";
 import type { PredictionFormValues } from "@/lib/validation/predictionSchema";
+import type { PredictionOptions } from "@/types/options";
 
 interface PredictionFormProps {
   form: UseFormReturn<PredictionFormValues>;
   isSubmitting: boolean;
   submissionError: string | null;
   onSubmit: (values: PredictionFormValues) => Promise<void>;
+  options: PredictionOptions;
 }
 
 export function PredictionForm({
@@ -29,6 +30,7 @@ export function PredictionForm({
   isSubmitting,
   submissionError,
   onSubmit,
+  options,
 }: PredictionFormProps): JSX.Element {
   const {
     control,
@@ -43,12 +45,42 @@ export function PredictionForm({
       className="flex flex-col gap-6"
       noValidate
     >
-      <GeneralSection control={control} register={register} errors={errors} />
-      <CpuSection control={control} register={register} errors={errors} />
-      <GpuSection control={control} register={register} errors={errors} />
-      <MemorySection control={control} register={register} errors={errors} />
-      <DisplaySection control={control} register={register} errors={errors} />
-      <ConnectivitySection control={control} />
+      <GeneralSection
+        control={control}
+        register={register}
+        errors={errors}
+        options={options}
+      />
+      <CpuSection
+        control={control}
+        register={register}
+        errors={errors}
+        options={options}
+      />
+      <GpuSection
+        control={control}
+        register={register}
+        errors={errors}
+        options={options}
+      />
+      <MemorySection
+        control={control}
+        register={register}
+        errors={errors}
+        options={options}
+      />
+      <DisplaySection
+        control={control}
+        register={register}
+        errors={errors}
+        options={options}
+      />
+      <ConnectivitySection
+        control={control}
+        register={register}
+        errors={errors}
+        options={options}
+      />
       <PowerSection register={register} errors={errors} />
 
       {submissionError && (

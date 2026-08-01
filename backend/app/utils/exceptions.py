@@ -23,14 +23,6 @@ class ComputerPricePredictionError(Exception):
     error_code: str = "APPLICATION_ERROR"
 
     def __init__(self, message: str) -> None:
-        """
-        Initialize the exception.
-
-        Parameters
-        ----------
-        message : str
-            Human-readable, client-safe error message.
-        """
         self.message = message
         super().__init__(message)
 
@@ -38,21 +30,28 @@ class ComputerPricePredictionError(Exception):
 class ArtifactLoadError(ComputerPricePredictionError):
     """
     Raised when the model or preprocessor artifact fails to load from disk.
-
-    Typically indicates a missing file, a corrupted `.joblib` file, or
-    a scikit-learn version mismatch between training and serving
-    environments.
     """
 
     error_code = "ARTIFACT_LOAD_ERROR"
 
 
+class OptionsLoadError(ComputerPricePredictionError):
+    """
+    Raised when the cached categorical options vocabulary (`options.json`)
+    fails to load or parse.
+
+    Distinguished from `ArtifactLoadError` because options are a JSON
+    vocabulary cache, not a `.joblib` model/preprocessor artifact, and
+    a missing options file should never block predictions — only the
+    `/api/v1/options` endpoint depends on it.
+    """
+
+    error_code = "OPTIONS_LOAD_ERROR"
+
+
 class ModelNotLoadedError(ComputerPricePredictionError):
     """
     Raised when a prediction is attempted before artifacts are loaded.
-
-    Should only occur if the predictor is used outside the normal
-    FastAPI application lifespan (e.g. a misconfigured test).
     """
 
     error_code = "MODEL_NOT_LOADED"
@@ -61,8 +60,7 @@ class ModelNotLoadedError(ComputerPricePredictionError):
 class FeaturePreprocessingError(ComputerPricePredictionError):
     """
     Raised when validated request data fails to be transformed by the
-    preprocessing pipeline (e.g. unseen category values, column
-    mismatch against the fitted pipeline).
+    preprocessing pipeline.
     """
 
     error_code = "FEATURE_PREPROCESSING_ERROR"
@@ -70,8 +68,7 @@ class FeaturePreprocessingError(ComputerPricePredictionError):
 
 class PredictionExecutionError(ComputerPricePredictionError):
     """
-    Raised when the underlying regression model fails during
-    inference on already-preprocessed features.
+    Raised when the underlying regression model fails during inference.
     """
 
     error_code = "PREDICTION_EXECUTION_ERROR"

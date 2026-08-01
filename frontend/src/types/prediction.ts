@@ -29,18 +29,18 @@ export interface PredictionRequest {
 
   // CPU
   cpu_brand: string;
-  cpu_tier: string;
+  cpu_tier: number;
   cpu_cores: number;
   cpu_threads: number;
   cpu_base_ghz: number;
   cpu_boost_ghz: number | null;
   cpu_series: string;
-  cpu_generation: string;
+  cpu_generation: number;
   cpu_suffix: string | null;
 
   // GPU
   gpu_brand: string;
-  gpu_tier: string;
+  gpu_tier: number;
   gpu_family: string;
   gpu_generation: string | null;
   gpu_suffix: string | null;
@@ -66,7 +66,7 @@ export interface PredictionRequest {
 
   // Connectivity
   wifi: string;
-  bluetooth: string;
+  bluetooth: number;
 
   // Physical & Misc
   weight_kg: number | null;

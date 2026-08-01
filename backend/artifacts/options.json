@@ -1,0 +1,115 @@
+{
+  "device_type": [
+    "Desktop",
+    "Laptop"
+  ],
+  "brand": [
+    "Acer",
+    "Apple",
+    "Asus",
+    "Dell",
+    "Gigabyte",
+    "Hp",
+    "Lenovo",
+    "Msi",
+    "Razer",
+    "Samsung"
+  ],
+  "os": [
+    "Chromeos",
+    "Linux",
+    "Macos",
+    "Windows"
+  ],
+  "form_factor": [
+    "2-In-1",
+    "Atx",
+    "Full-Tower",
+    "Gaming",
+    "Mainstream",
+    "Micro-Atx",
+    "Mini-Itx",
+    "Sff",
+    "Ultrabook",
+    "Workstation"
+  ],
+  "cpu_brand": [
+    "Amd",
+    "Apple",
+    "Intel"
+  ],
+  "cpu_series": [
+    "M",
+    "Ryzen 3",
+    "Ryzen 5",
+    "Ryzen 7",
+    "Ryzen 9",
+    "i3",
+    "i5",
+    "i7",
+    "i9"
+  ],
+  "cpu_suffix": [
+    "Max",
+    "Pro",
+    "Standard"
+  ],
+  "gpu_brand": [
+    "Amd",
+    "Apple",
+    "Intel",
+    "Nvidia"
+  ],
+  "gpu_family": [
+    "ARC",
+    "Apple",
+    "RTX",
+    "RX",
+    "Unknown"
+  ],
+  "gpu_generation": [
+    "-1",
+    "A310",
+    "A380",
+    "A580",
+    "A700",
+    "A770",
+    "Integrated",
+    "R5000",
+    "R6000",
+    "R7000",
+    "RTX20",
+    "RTX30",
+    "RTX40"
+  ],
+  "gpu_suffix": [
+    "50",
+    "60",
+    "70",
+    "80",
+    "90",
+    "Limited",
+    "Standard",
+    "Unknown"
+  ],
+  "storage_type": [
+    "Hdd",
+    "Hybrid",
+    "Nvme",
+    "Ssd"
+  ],
+  "display_type": [
+    "Ips",
+    "Led",
+    "Mini-Led",
+    "Oled",
+    "Qled",
+    "Va"
+  ],
+  "wifi": [
+    "Wi-Fi 5",
+    "Wi-Fi 6",
+    "Wi-Fi 6E",
+    "Wi-Fi 7"
+  ]
+}

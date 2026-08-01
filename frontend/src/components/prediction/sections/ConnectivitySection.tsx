@@ -1,21 +1,29 @@
 /**
- * "Connectivity" section of the prediction form: Wi-Fi and Bluetooth
- * standards.
+ * "Connectivity" section. wifi is a dynamic dropdown; bluetooth is
+ * numeric per the trained model's schema.
  */
 
 import { Wifi } from "lucide-react";
-import type { Control } from "react-hook-form";
+import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormSectionCard } from "@/components/prediction/FormSectionCard";
 import { SelectField } from "@/components/prediction/SelectField";
-import { BLUETOOTH_OPTIONS, WIFI_OPTIONS } from "@/constants/formOptions";
+import { NumberField } from "@/components/prediction/NumberField";
+import { toSelectOptions } from "@/lib/toSelectOptions";
 import type { PredictionFormValues } from "@/lib/validation/predictionSchema";
+import type { PredictionOptions } from "@/types/options";
 
 interface ConnectivitySectionProps {
   control: Control<PredictionFormValues>;
+  register: UseFormRegister<PredictionFormValues>;
+  errors: FieldErrors<PredictionFormValues>;
+  options: PredictionOptions;
 }
 
 export function ConnectivitySection({
   control,
+  register,
+  errors,
+  options,
 }: ConnectivitySectionProps): JSX.Element {
   return (
     <FormSectionCard
@@ -28,13 +36,15 @@ export function ConnectivitySection({
         control={control}
         name="wifi"
         label="Wi-Fi Standard"
-        options={WIFI_OPTIONS}
+        options={toSelectOptions(options.wifi)}
       />
-      <SelectField
-        control={control}
+      <NumberField
+        register={register}
+        errors={errors}
         name="bluetooth"
         label="Bluetooth Version"
-        options={BLUETOOTH_OPTIONS}
+        step={0.1}
+        helpText="Numeric version value used by the trained model"
       />
     </FormSectionCard>
   );

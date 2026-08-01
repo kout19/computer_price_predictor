@@ -1,6 +1,5 @@
 /**
- * "Display" section of the prediction form: panel type, size,
- * refresh rate, and resolution.
+ * "Display" section. display_type is a dynamic dropdown.
  */
 
 import { Monitor } from "lucide-react";
@@ -8,19 +7,22 @@ import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormSectionCard } from "@/components/prediction/FormSectionCard";
 import { SelectField } from "@/components/prediction/SelectField";
 import { NumberField } from "@/components/prediction/NumberField";
-import { DISPLAY_TYPE_OPTIONS } from "@/constants/formOptions";
+import { toSelectOptions } from "@/lib/toSelectOptions";
 import type { PredictionFormValues } from "@/lib/validation/predictionSchema";
+import type { PredictionOptions } from "@/types/options";
 
 interface DisplaySectionProps {
   control: Control<PredictionFormValues>;
   register: UseFormRegister<PredictionFormValues>;
   errors: FieldErrors<PredictionFormValues>;
+  options: PredictionOptions;
 }
 
 export function DisplaySection({
   control,
   register,
   errors,
+  options,
 }: DisplaySectionProps): JSX.Element {
   return (
     <FormSectionCard
@@ -33,7 +35,7 @@ export function DisplaySection({
         control={control}
         name="display_type"
         label="Display Type"
-        options={DISPLAY_TYPE_OPTIONS}
+        options={toSelectOptions(options.display_type)}
         required={false}
       />
       <NumberField

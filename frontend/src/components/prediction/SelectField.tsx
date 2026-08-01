@@ -14,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { FormFieldWrapper } from "@/components/prediction/FormFieldWrapper";
-import type { SelectOption } from "@/constants/formOptions";
+import type { SelectOption } from "@/lib/toSelectOptions";
 
 interface SelectFieldProps<TFormValues extends FieldValues> {
   control: Control<TFormValues>;

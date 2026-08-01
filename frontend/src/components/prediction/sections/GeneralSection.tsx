@@ -1,6 +1,6 @@
 /**
- * "General" section of the prediction form: device type, brand,
- * release year, operating system, and form factor.
+ * "General" section of the prediction form. All dropdowns sourced
+ * dynamically from the backend options vocabulary.
  */
 
 import { Laptop } from "lucide-react";
@@ -8,24 +8,22 @@ import type { Control, FieldErrors, UseFormRegister } from "react-hook-form";
 import { FormSectionCard } from "@/components/prediction/FormSectionCard";
 import { SelectField } from "@/components/prediction/SelectField";
 import { NumberField } from "@/components/prediction/NumberField";
-import {
-  BRAND_OPTIONS,
-  DEVICE_TYPE_OPTIONS,
-  FORM_FACTOR_OPTIONS,
-  OS_OPTIONS,
-} from "@/constants/formOptions";
+import { toSelectOptions } from "@/lib/toSelectOptions";
 import type { PredictionFormValues } from "@/lib/validation/predictionSchema";
+import type { PredictionOptions } from "@/types/options";
 
 interface GeneralSectionProps {
   control: Control<PredictionFormValues>;
   register: UseFormRegister<PredictionFormValues>;
   errors: FieldErrors<PredictionFormValues>;
+  options: PredictionOptions;
 }
 
 export function GeneralSection({
   control,
   register,
   errors,
+  options,
 }: GeneralSectionProps): JSX.Element {
   return (
     <FormSectionCard
@@ -38,13 +36,13 @@ export function GeneralSection({
         control={control}
         name="device_type"
         label="Device Type"
-        options={DEVICE_TYPE_OPTIONS}
+        options={toSelectOptions(options.device_type)}
       />
       <SelectField
         control={control}
         name="brand"
         label="Brand"
-        options={BRAND_OPTIONS}
+        options={toSelectOptions(options.brand)}
       />
       <NumberField
         register={register}
@@ -57,13 +55,13 @@ export function GeneralSection({
         control={control}
         name="os"
         label="Operating System"
-        options={OS_OPTIONS}
+        options={toSelectOptions(options.os)}
       />
       <SelectField
         control={control}
         name="form_factor"
         label="Form Factor"
-        options={FORM_FACTOR_OPTIONS}
+        options={toSelectOptions(options.form_factor)}
       />
     </FormSectionCard>
   );

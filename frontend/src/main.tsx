@@ -1,12 +1,13 @@
 /**
- * Application entry point. Mounts the React tree, wires up routing
- * and theming providers, and imports the global stylesheet exactly
- * once.
+ * Application entry point. Mounts the React tree, wires up routing,
+ * theming, and TanStack Query providers, and imports the global
+ * stylesheet exactly once.
  */
 
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import App from "./App";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import "./index.css";
@@ -17,12 +18,23 @@ if (!rootElement) {
   throw new Error("Root element with id 'root' was not found in index.html.");
 }
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+
 createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter>
-      <ThemeProvider defaultTheme="dark">
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <ThemeProvider defaultTheme="dark">
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>,
 );
