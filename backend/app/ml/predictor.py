@@ -200,7 +200,24 @@ class Predictor:
             logger.info("Prediction DataFrame")
             logger.info(input_df.dtypes)
 
-            return self._preprocessor.transform(input_df)
+            transformed = self._preprocessor.transform(input_df)
+
+            import numpy as np
+
+            print("=" * 80)
+
+            feature_names = self._preprocessor.get_feature_names_out()
+
+            for i, name in enumerate(feature_names):
+                value = transformed[0, i]
+
+                if np.isnan(value):
+                    print(f"NaN found at column {i}")
+                    print(f"Feature name: {name}")
+
+            print("=" * 80)
+
+            return transformed
 
         except Exception as exc:
 
