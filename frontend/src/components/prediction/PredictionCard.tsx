@@ -4,6 +4,7 @@ import {
   BadgeCheck,
   CalendarRange,
   CircleDollarSign,
+  Link,
   Sparkles,
 } from "lucide-react";
 import { GlassPanel } from "@/components/common/GlassPanel";
@@ -84,10 +85,10 @@ export function PredictionCard({ result }: PredictionCardProps): JSX.Element {
               Ready for demo presentation and further analysis.
             </p>
             <Button asChild variant="glow" size="sm">
-              <a href="/model-info">
+              <Link to="/model-info">
                 Review model details
                 <ArrowRight className="h-4 w-4" />
-              </a>
+              </Link>
             </Button>
           </div>
         </div>
