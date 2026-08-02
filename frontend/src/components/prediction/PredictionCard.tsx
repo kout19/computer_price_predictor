@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BadgeCheck,
   CalendarRange,
   CircleDollarSign,
-  Link,
   Sparkles,
 } from "lucide-react";
 import { GlassPanel } from "@/components/common/GlassPanel";
@@ -35,6 +35,7 @@ export function PredictionCard({ result }: PredictionCardProps): JSX.Element {
               Confidence placeholder
             </div>
           </div>
+
           <div className="space-y-4">
             <p className="text-sm uppercase tracking-[0.28em] text-muted-foreground">
               Predicted Price
@@ -47,6 +48,7 @@ export function PredictionCard({ result }: PredictionCardProps): JSX.Element {
               regression model and the selected feature set.
             </p>
           </div>
+
           <div className="grid gap-4 rounded-xl border border-white/10 bg-white/5 p-5 sm:grid-cols-3">
             <div className="flex items-start gap-3">
               <CircleDollarSign className="mt-0.5 h-4 w-4 text-primary" />
@@ -80,12 +82,13 @@ export function PredictionCard({ result }: PredictionCardProps): JSX.Element {
               </div>
             </div>
           </div>
+
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
             <p className="text-sm text-muted-foreground">
               Ready for demo presentation and further analysis.
             </p>
             <Button asChild variant="glow" size="sm">
-              <Link to="/model-info">
+              <Link to="/model-info" className="flex items-center gap-2">
                 Review model details
                 <ArrowRight className="h-4 w-4" />
               </Link>
