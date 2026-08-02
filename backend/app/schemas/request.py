@@ -13,11 +13,6 @@ from typing import Any, Dict, Optional
 from pydantic import BaseModel, ConfigDict, Field
 
 _CURRENT_YEAR_UPPER_BOUND = 2035
-
-print("=" * 60)
-print("LOADED REQUEST.PY")
-print(__file__)
-print("=" * 60)
 class PredictionRequest(BaseModel):
     """
     Input payload for a single computer price prediction.
@@ -257,7 +252,3 @@ class PredictionRequest(BaseModel):
             a single-row `pandas.DataFrame`.
         """
         return self.model_dump()
-print("cpu_tier:", PredictionRequest.model_fields["cpu_tier"].annotation)
-print("gpu_tier:", PredictionRequest.model_fields["gpu_tier"].annotation)
-print("cpu_generation:", PredictionRequest.model_fields["cpu_generation"].annotation)
-print("bluetooth:", PredictionRequest.model_fields["bluetooth"].annotation)

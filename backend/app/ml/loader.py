@@ -105,26 +105,13 @@ class ArtifactLoader:
             If either artifact file is missing, unreadable, or fails
             to deserialize.
         """
-        # --- Detailed debug output ---
-        print("=" * 80)
-        print("Loading Preprocessor From:")
-        print(self.preprocessor_path.resolve())
-
-        print("\nLoading Model From:")
-        print(self.model_path.resolve())
-        print("=" * 80)
-
+      
         # --- Load artifacts ---
         self._preprocessor = self._load_joblib(self.preprocessor_path, "preprocessor")
-        print("\n========== PREPROCESSOR ==========")
         self._model = self._load_joblib(self.model_path, "model")
-        for name, transformer, columns in self._preprocessor.transformers_:
             
-            print(f"\n{name}")
-            print(columns)
 
         # --- Confirmation ---
-        print("\n✅ Loaded Successfully!")
         logger.info(
             "ML artifacts loaded successfully (preprocessor=%s, model=%s).",
             self.preprocessor_path.name,
@@ -168,7 +155,4 @@ class ArtifactLoader:
         logger.debug("%s artifact loaded from '%s'.", artifact_name.capitalize(), path)
         return artifact
     
-        for name, transformer, columns in self._preprocessor.transformers_:
-                
-            print("\n", name)
-            print(columns)
+       

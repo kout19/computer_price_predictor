@@ -105,14 +105,6 @@ class Predictor:
 
         input_df = self._to_dataframe(features)
         transformed = self._transform(input_df)
-        print("=" * 80)
-        print("FEATURES RECEIVED")
-        for k, v in features.items():
-            print(f"{k:25} {v!r} ({type(v).__name__})")
-        print("=" * 80)
-        for name, transformer, columns in self._preprocessor.transformers_:
-            print(f"\n{name}")
-            print(columns)
         prediction = self._infer(transformed)
         logger.info("Prediction generated successfully: %.2f", prediction)
         return prediction
@@ -201,22 +193,6 @@ class Predictor:
             logger.info(input_df.dtypes)
 
             transformed = self._preprocessor.transform(input_df)
-
-            import numpy as np
-
-            print("=" * 80)
-
-            feature_names = self._preprocessor.get_feature_names_out()
-
-            for i, name in enumerate(feature_names):
-                value = transformed[0, i]
-
-                if np.isnan(value):
-                    print(f"NaN found at column {i}")
-                    print(f"Feature name: {name}")
-
-            print("=" * 80)
-
             return transformed
 
         except Exception as exc:
@@ -247,19 +223,6 @@ class Predictor:
             unexpected/empty result.
         """
         try:
-            import numpy as np
-
-            print("=" * 80)
-            print("Transformed shape:", transformed_features.shape)
-            print("Contains NaN:", np.isnan(transformed_features).any())
-
-            if np.isnan(transformed_features).any():
-                rows, cols = np.where(np.isnan(transformed_features))
-                print("NaN locations:")
-                for r, c in zip(rows, cols):
-                    print(f"Row {r}, Column {c}")
-
-            print("=" * 80)
             prediction = self._model.predict(transformed_features)
         except Exception as exc:  # noqa: BLE001 - boundary with third-party model
             message = "Model failed to generate a prediction."

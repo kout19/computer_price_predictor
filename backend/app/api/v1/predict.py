@@ -18,16 +18,8 @@ from app.schemas.response import PredictionResponse
 from app.services.prediction_service import PredictionService
 
 logger = logging.getLogger(__name__)
-# print(PredictionRequest.model_json_schema())
 
 router = APIRouter(prefix="/predict", tags=["Prediction"])
-print("=" * 60)
-print("PREDICTION REQUEST CLASS")
-print(PredictionRequest)
-print(PredictionRequest.__module__)
-print(PredictionRequest.__annotations__)
-print("=" * 60)
-
 
 @router.post(
     "",
@@ -70,14 +62,6 @@ def predict_price(
     PredictionExecutionError
         Propagated to the global exception handler if inference fails.
     """
-    print("=" * 80)
-    print("API ROUTE HIT")
-    print("Schema module:", PredictionRequest.__module__)
-    print("Payload:")
-    print(payload)
-    print("=" * 80)
-    print(type(payload))
-    print(id(PredictionRequest))
     logger.info("Received prediction request for device_type=%s, brand=%s",
                 payload.device_type, payload.brand)
 

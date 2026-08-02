@@ -1,9 +1,12 @@
 # Computer Price Prediction API
 
-Production-grade FastAPI backend that serves price predictions for
-computers (laptops, desktops, AIOs, etc.) using a trained scikit-learn
-regression pipeline.
+## Run
 
+uvicorn app.main:app --reload
+
+Swagger
+
+http://127.0.0.1:8000/docs
 ## Architecture
 React + TypeScript
 ↓
@@ -75,6 +78,7 @@ pytest tests/ -v
 | GET | `/` | API metadata |
 | GET | `/health` | Reports whether the model/preprocessor are loaded |
 | POST | `/api/v1/predict` | Predicts a computer's price from its specification |
+| GET  |`/api/v1/options` | sends the form ooption list, form dropdown lists,  to frontend
 
 ## Design Notes
 
